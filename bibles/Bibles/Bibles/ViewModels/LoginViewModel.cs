@@ -2,10 +2,9 @@
 {
     using System.Windows.Input;
    
-
     public class LoginViewModel
     {
-        //después insertaremos el código (video 7)
+        //código (video 7)
      
         #region Properties
         public string Email
@@ -33,10 +32,11 @@
         }
         #endregion
 
-        #region Constructors 
+        #region Constructors
         public LoginViewModel()
         {
             this.IsRemembered = true;
+
         }
         #endregion
 

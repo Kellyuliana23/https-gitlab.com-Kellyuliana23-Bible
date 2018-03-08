@@ -3,8 +3,8 @@
     public class MainViewModel
     {
         #region ViewModels
-        //debemos ligar éste objeto login a la 
-        public LoginViewModel login
+        //debemos ligar éste objeto login a...
+        public LoginViewModel Login
         {
             get;
             set;
@@ -14,7 +14,7 @@
         #region Constructors
         public MainViewModel ()
         {
-            this.login = new LoginViewModel();
+            this.Login = new LoginViewModel();
         }
         #endregion
     }
