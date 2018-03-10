@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Bibles.Views.LoginPage"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
-    Title="Digital bibles search">
+    Title="¡Welcome! please login">
     <ContentPage.Content>
          <ScrollView
             BindingContext="{Binding Login}">
@@ -76,7 +76,7 @@
             </StackLayout>
                 <Label
                     HorizontalOptions="Center"
-                    Text="Forgot your password?"
+                    Text="¿Forgot your password?"
                     TextColor="Blue"
                     VerticalOptions="CenterAndExpand">
                 </Label>
@@ -101,7 +101,7 @@
                         HeightRequest="48"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
-                        Text="Sign in"
+                        Text="Register"
                         TextColor="White"
                         FontAttributes="Bold"
                         InputTransparent="False"

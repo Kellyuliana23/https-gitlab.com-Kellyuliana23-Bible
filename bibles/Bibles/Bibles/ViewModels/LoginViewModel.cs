@@ -1,8 +1,8 @@
 ﻿namespace Bibles.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
-    using System.ComponentModel;
     using System.Windows.Input;
+    using Views;
     using Xamarin.Forms;
 
     //Heredar de la BaseViewModel para evitarme crear tantos eventos
@@ -10,11 +10,11 @@
     {
         #region Attributes
         //Atributo privado con inicial en minúscula
+        private string email;
         private string password;
         private bool isRunning;
         private bool isEnabled;
         #endregion
-
 
         //código (video 7)
 
@@ -23,8 +23,9 @@
 
         public string Email
         {
-            get;
-            set;
+            // para refrescar la vista y que lo deje en blanco
+            get { return this.email; }
+            set { SetValue(ref this.email, value); }
         }
 
         public string Password
@@ -112,11 +113,16 @@
                 this.Password = string.Empty;
                 return;
             }
+            this.IsRunning = false;
+            this.IsEnabled = true;
 
-            await Application.Current.MainPage.DisplayAlert(
-                    "OK",
-                    "Welcome!!!",
-                    "Accept");
+            this.Email = string.Empty;
+            this.Password = string.Empty;
+
+            //apilar para navegar entre páginas, método asíncrono
+            MainViewModel.GetInstance().Bibles = new BiblesViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new BiblesPage());
+                       
         }
         #endregion
 
