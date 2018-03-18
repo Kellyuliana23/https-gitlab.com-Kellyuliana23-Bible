@@ -8,6 +8,7 @@
     //Heredar de la BaseViewModel para evitarme crear tantos eventos
     public class LoginViewModel : BaseViewModel
     {
+
         #region Attributes
         //Atributo privado con inicial en minúscula
         private string email;
@@ -55,8 +56,12 @@
         #region Constructors
         public LoginViewModel()
         {
+
             this.IsRemembered = true;
             this.IsEnabled = true;
+
+            this.Email = "kellyuliana23@gmail.com";
+            this.Password = "1234";
 
         }
         #endregion
@@ -119,13 +124,13 @@
             this.Email = string.Empty;
             this.Password = string.Empty;
 
-            //apilar para navegar entre páginas, método asíncrono
+             //apilar para navegar entre páginas, método asíncrono
             MainViewModel.GetInstance().Bibles = new BiblesViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new BiblesPage());
-                       
-        }
-        #endregion
 
+        }
+        
+        #endregion
     }
 }
 
