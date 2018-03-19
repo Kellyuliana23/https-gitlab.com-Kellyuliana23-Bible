@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Windows.Input;
+    using GalaSoft.MvvmLight.Command;
     using Models;
     using Services;
     using Xamarin.Forms;
@@ -15,8 +17,10 @@
 
         #region Attributes
         private BibleResponse bibleResponse;
-        private ObservableCollection<BibleItemViewModel> bibles;
+        private ObservableCollection<BibleItemViewModel> bibles; //para pintar en listView
         private bool isRefreshing;
+        private string filter;
+
         #endregion
 
         #region Properties
@@ -31,17 +35,28 @@
             get { return this.isRefreshing; }
             set { SetValue(ref this.isRefreshing, value); }
         }
+
+        public string Filter
+        {
+            get { return this.filter; }
+            set
+            {   SetValue(ref this.filter, value);
+                this.Search();
+            }
+        }
         #endregion
 
         #region Constructors
         public BiblesViewModel()
         {
+            //instanciar servicio apiService
             this.apiService = new ApiService();
             this.LoadBibles();
         }
         #endregion
 
         #region Methods
+        //para traer las biblias
         private async void LoadBibles()
         {
             this.IsRefreshing = true;
@@ -57,10 +72,11 @@
                 return;
             }
 
+            //método asíncrono
             var response = await this.apiService.Get<BibleResponse>(
-                "http://api.biblesupersearch.com",
-                "/api",
-                "/bibles");
+                "http://api.biblesupersearch.com", //línea base
+                "/api", //prefijo
+                "/bibles");  //nombre controlador
 
             if (!response.IsSuccess)
             {
@@ -94,6 +110,42 @@
                 Strongs = b.Value.Strongs,
                 Year = b.Value.Year,
             });
+        }
+        #endregion
+
+        #region Commands
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(LoadBibles);
+            }
+        }
+
+        public ICommand SearchCommand
+        {
+            get
+            {
+                return new RelayCommand(Search);
+            }
+        }
+
+        private void Search()
+        {
+            if (string.IsNullOrEmpty(this.Filter))
+            {
+                this.Bibles = new ObservableCollection<BibleItemViewModel>(
+                    this.ToBibleItemViewModel());
+            }
+            else
+            {
+                this.Bibles = new ObservableCollection<BibleItemViewModel>(
+                    this.ToBibleItemViewModel().Where(
+                        b => b.Name.ToLower().Contains(this.Filter.ToLower()) ||
+                             b.Lang.ToLower().Contains(this.Filter.ToLower()) ||
+                             b.Year.ToLower().Contains(this.Filter.ToLower()) ||
+                             b.Module.ToLower().Contains(this.Filter.ToLower())));
+            }
         }
         #endregion
     }

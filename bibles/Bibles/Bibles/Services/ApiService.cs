@@ -8,7 +8,7 @@
     using System.Threading.Tasks;
     using Models;
     using Newtonsoft.Json;
-    using Plugin.Connectivity;
+    using Plugin.Connectivity; //add nuget xam.plugin.connectivity
 
     public class ApiService
     {

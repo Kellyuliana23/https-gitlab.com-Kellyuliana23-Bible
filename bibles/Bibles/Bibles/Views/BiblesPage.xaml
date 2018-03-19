@@ -9,6 +9,12 @@
         <StackLayout
             BindingContext="{Binding Bibles}"
             Padding="5">
+            <SearchBar
+                Text="{Binding Filter, Mode=TwoWay}"
+                Placeholder="Search..."
+                SearchCommand="{Binding SearchCommand}">
+                
+            </SearchBar>
             <ListView 
                 HasUnevenRows="true" 
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
@@ -30,7 +36,7 @@
                                         FontAttributes="Bold"
                                         FontSize="Medium"
                                         Text="{Binding Name}"
-                                        TextColor="Black">
+                                        TextColor="Purple">
                                     </Label>
                                     <Label
                                         Text="{Binding Module}"
@@ -50,7 +56,7 @@
                                         TextColor="Black">
                                     </Label>
                                 </StackLayout>
-                            </Grid>
+                                </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
