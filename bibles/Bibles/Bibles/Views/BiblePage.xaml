@@ -7,8 +7,7 @@
     Title="Bible">
     <ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Bible}"
-            Padding="5">
+            BindingContext="{Binding Bible}">
             <ListView 
                 HasUnevenRows="true" 
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
@@ -16,6 +15,10 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                                <Frame
+                                CornerRadius="10"
+                                HasShadow="True"
+                                Margin="2">
                             <Grid>
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SelectBookCommand}"/>
@@ -29,7 +32,7 @@
                                     FontAttributes="Bold"
                                     FontSize="Medium"
                                     Text="{Binding Name}"
-                                    TextColor="Black">
+                                    TextColor="Purple">
                                 </Label>
                                 <Label
                                     Grid.Column="1"
@@ -38,6 +41,7 @@
                                     TextColor="Black">
                                 </Label>
                             </Grid>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

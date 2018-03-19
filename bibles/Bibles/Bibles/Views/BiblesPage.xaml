@@ -25,7 +25,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <Frame
-                                CornerRadius="20"
+                                CornerRadius="10"
                                 HasShadow="True"
                                 Margin="5">
                             <Grid>
