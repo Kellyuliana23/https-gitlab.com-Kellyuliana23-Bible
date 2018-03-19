@@ -4,24 +4,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Bibles.Views.BiblesPage"
     BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    BackgroundColor="#6c4675"
     Title="Bibles">
     <ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Bibles}"
-            Padding="5">
+            BindingContext="{Binding Bibles}">
             <SearchBar
+                BackgroundColor="#6c4675"
                 Text="{Binding Filter, Mode=TwoWay}"
                 Placeholder="Search..."
-                SearchCommand="{Binding SearchCommand}">
-                
+                PlaceholderColor="White">
             </SearchBar>
             <ListView 
-                HasUnevenRows="true" 
+                BackgroundColor="#6c4675"
+                HasUnevenRows="true"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-                ItemsSource="{Binding Bibles}">
+                ItemsSource="{Binding Bibles}"
+                SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <Frame
+                                CornerRadius="20"
+                                HasShadow="True"
+                                Margin="5">
                             <Grid>
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SelectBibleCommand}"/>
@@ -57,6 +63,7 @@
                                     </Label>
                                 </StackLayout>
                                 </Grid>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
